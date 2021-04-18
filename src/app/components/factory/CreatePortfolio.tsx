@@ -37,12 +37,18 @@ const CreatePortfolio: FunctionComponent = () => {
         url: 'http://localhost:3000',
         contractAddress,
         creatorAddress: account,
-        chainId: 4,
+        chainId: network.chainId,
         ipfsBase: 'https://factory-ipfs.gimmix.org/ipfs/',
         ipfsUploadFile: 'https://factory-ipfs.gimmix.org/upload/',
         ipfsUploadJson: 'https://factory-ipfs.gimmix.org/uploadJSON/',
-        infuraUrl:
-          'https://rinkeby.infura.io/v3/b95f6330bfdd4f5d8960db9d1d3da676'
+        rpcUrl:
+          network.chainId == 4
+            ? process.env.NEXT_PUBLIC_RPC_4
+            : network.chainId == 5
+            ? process.env.NEXT_PUBLIC_RPC_5
+            : network.chainId == 80001
+            ? process.env.NEXT_PUBLIC_RPC_80001
+            : null
       };
       const { built } = await fetch('/api/build', {
         method: 'POST',
