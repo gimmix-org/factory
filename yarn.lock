@@ -561,10 +561,10 @@
   resolved "https://registry.yarnpkg.com/@gimmixfactory/contracts/-/contracts-0.0.6.tgz#992789b6a7cf4bede941415a6e617530def1c7fa"
   integrity sha512-LWh6siWpMv5hj45v+XO4OHyqdFpv8XMWdvlMe68AW65Rp4DgMTQey12mHDssnyRHflvKgegMbPwF9iio2+ulZQ==
 
-"@gimmixfactory/use-wallet@^0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@gimmixfactory/use-wallet/-/use-wallet-0.0.10.tgz#073102db4c67e1e732bf8cab609219fbf9b05b73"
-  integrity sha512-wFqciopY4AmZ2FQijKpKbvS9zm1cbk2vAu7tm89jQHRTaoxkKjae9k8YoE3vZQAsUAQ4Vp4SqlRvPevIK0qiWQ==
+"@gimmixfactory/use-wallet@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@gimmixfactory/use-wallet/-/use-wallet-0.0.11.tgz#9a81ee12e2af708499b7b4d018e8ed239a3e7b27"
+  integrity sha512-rXqueJLFXk5/ffW0UCm9s9Lr1J56iUUO3taE62IMYKQdFedXRlpPllt5ZoMUILDg9JsLqItbmdhmd8I+RmJyxA==
   dependencies:
     "@ethersproject/providers" "^5.1.0"
     web3modal "^1.9.3"
