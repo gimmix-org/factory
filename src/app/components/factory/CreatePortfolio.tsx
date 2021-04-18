@@ -32,8 +32,8 @@ const CreatePortfolio: FunctionComponent = () => {
       setContractAddress(contractAddress);
       const config = {
         template: 'portfolio',
-        name: 'Test',
-        description: 'This is my site.',
+        name: name,
+        description: `The portfolio of ${name}.`,
         url: 'http://localhost:3000',
         contractAddress,
         creatorAddress: account,
