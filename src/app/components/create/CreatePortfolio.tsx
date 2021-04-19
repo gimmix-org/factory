@@ -1,9 +1,11 @@
-import React, { FormEventHandler, FunctionComponent, useState } from 'react';
+import React, { FormEventHandler, useState } from 'react';
 import Addresses from '@gimmixfactory/contracts/dist/addresses';
 import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
+import ConnectWalletButton from '@app/components/wallet/ConnectWalletButton';
+import FormItemTextInput from '@app/components/forms/FormItemTextInput';
 
-const CreatePortfolio: FunctionComponent = () => {
+const CreatePortfolio = () => {
   const [name, setName] = useState('');
   const [symbol, setSymbol] = useState('');
   const [error, setError] = useState<string>();
@@ -13,6 +15,7 @@ const CreatePortfolio: FunctionComponent = () => {
   const [showAdvanced, _setShowAdvanced] = useState(false);
 
   const onDeployClick: FormEventHandler = async e => {
+    console.log(e);
     e.preventDefault();
     if (
       !network?.name ||
@@ -58,11 +61,14 @@ const CreatePortfolio: FunctionComponent = () => {
             ? process.env.NEXT_PUBLIC_RPC_80001
             : null
       };
-      const { built } = await fetch('/api/build', {
-        method: 'POST',
-        body: JSON.stringify({ config }),
-        headers: { 'content-type': 'application/json' }
-      }).then(res => res.json());
+      const { built } = await fetch(
+        'https://factory-sites.gimmix.org/api/build',
+        {
+          method: 'POST',
+          body: JSON.stringify({ config }),
+          headers: { 'content-type': 'application/json' }
+        }
+      ).then(res => res.json());
       console.log({ built });
       setSiteBuilt(built);
     } catch (err) {
@@ -79,17 +85,18 @@ const CreatePortfolio: FunctionComponent = () => {
         <div className="section">
           <form onSubmit={onDeployClick}>
             <div className="form-section">
-              <div className="form-item">
-                <label>Name</label>
-                <input
-                  type="text"
-                  placeholder="Name..."
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                  minLength={3}
-                />
-              </div>
+              <FormItemTextInput
+                label="Set a Name"
+                description="This can be your name, the name of your business, the name of
+                  a collection you'd like to share, etc."
+                value={name}
+                setValue={setName}
+                inputProps={{
+                  required: true,
+                  minLength: 3,
+                  placeholder: 'Enter a name for your portfolio...'
+                }}
+              />
               {showAdvanced && (
                 <div className="form-item">
                   <label>Symbol</label>
@@ -123,9 +130,11 @@ const CreatePortfolio: FunctionComponent = () => {
               </div>
             )}
 
-            <button disabled={!network} type="submit">
-              Deploy
-            </button>
+            {!network ? (
+              <ConnectWalletButton text={`Connect Your Wallet to Deploy`} />
+            ) : (
+              <button type="submit">Deploy to {network.name}</button>
+            )}
           </form>
         </div>
         {error && <div className="error">{error}</div>}
@@ -148,6 +157,7 @@ const CreatePortfolio: FunctionComponent = () => {
         .create-form {
           padding: 20px;
           min-width: 400px;
+          max-width: 640px;
           border: 3px solid black;
         }
         .title {
@@ -157,12 +167,6 @@ const CreatePortfolio: FunctionComponent = () => {
         .form-section {
           margin-bottom: 20px;
         }
-        .form-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 10px;
-        }
         .error {
           background-color: red;
           color: white;
@@ -170,8 +174,16 @@ const CreatePortfolio: FunctionComponent = () => {
           font-size: 14px;
           text-align: center;
         }
-        input {
-          padding: 5px;
+        button {
+          padding: 5px 10px;
+          outline: none;
+          border: none;
+          border-radius: 3px;
+          background-color: black;
+          border-radius: 5px;
+          font-size: 14px;
+          color: white;
+          cursor: pointer;
         }
       `}</style>
     </div>

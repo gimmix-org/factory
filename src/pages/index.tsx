@@ -1,7 +1,6 @@
-import React, { FunctionComponent } from 'react';
 import Link from 'next/link';
 
-const Factory: FunctionComponent = () => {
+const IndexPage = () => {
   return (
     <div className="page">
       <div className="page-title">What do you want to make?</div>
@@ -13,7 +12,6 @@ const Factory: FunctionComponent = () => {
           </a>
         </Link>
       </div>
-
       <style jsx>{`
         .page {
           display: flex;
@@ -64,4 +62,4 @@ const Factory: FunctionComponent = () => {
   );
 };
 
-export default Factory;
+export default IndexPage;

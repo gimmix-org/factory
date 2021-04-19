@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { useWallet } from '@gimmixfactory/use-wallet';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
-const ConnectWalletButton: FunctionComponent = () => {
+const ConnectWalletButton = ({ text }: { text?: string }) => {
   const { connect, account, network } = useWallet();
 
   const onConnectClick = async () => {
@@ -28,7 +28,9 @@ const ConnectWalletButton: FunctionComponent = () => {
         </div>
       ) : (
         <div className="connect-wallet">
-          <button onClick={onConnectClick}>Connect Wallet</button>
+          <button type="button" onClick={onConnectClick}>
+            {text || 'Connect Wallet'}
+          </button>
         </div>
       )}
       <style jsx>{`

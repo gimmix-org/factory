@@ -1,12 +1,5 @@
-import CreatePortfolio from '@app/components/factory/CreatePortfolio';
-import React, { FunctionComponent } from 'react';
+import CreatePortfolio from '@app/components/create/CreatePortfolio';
 
-const Contract: FunctionComponent = () => {
-  return (
-    <>
-      <CreatePortfolio />
-    </>
-  );
-};
+const PortfolioPage = () => <CreatePortfolio />;
 
-export default Contract;
+export default PortfolioPage;

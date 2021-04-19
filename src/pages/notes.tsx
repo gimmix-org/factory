@@ -1,6 +1,4 @@
-import React, { FunctionComponent } from 'react';
-
-const Notes: FunctionComponent = () => {
+const NotesPage = () => {
   return (
     <div className="notes">
       <h1>Development Notes</h1>
@@ -32,9 +30,9 @@ const Notes: FunctionComponent = () => {
         </p>
         <p>
           The first Factory Template is "Portfolio". This template allows the
-          owner to mint their own NFTs (image, video, svg, html, etc) and add
-          basic metadata (title, description). These NFTs are automatically
-          displayed on the portfolio home page.
+          owner to mint their own NFTs (image, video, etc) and add basic
+          metadata (title, description). These NFTs are automatically displayed
+          on the portfolio home page.
         </p>
         <p>
           Because Factory uses shared token standards, all these new
@@ -57,6 +55,16 @@ const Notes: FunctionComponent = () => {
                 or make it unlimited. Buyers will pay for gas / minting fees as
                 part of the purchase flow.
               </li>
+              <li>
+                Re-sale fees can also be configured during the minting process.
+                (i.e. send the creator 10% of the purchase price on any sale).
+              </li>
+              <li>
+                For this template and all others that incorporate payments,
+                funds go directly to the creator from the purchaser (in other
+                words, payments are never routed through a Factory-owned service
+                for handling).
+              </li>
             </ul>
           </li>
           <li>
@@ -69,7 +77,10 @@ const Notes: FunctionComponent = () => {
                 requirement. Any bid in the last 15 minutes will extend bidding
                 another 15 minutes.
               </li>
-              <li>Sell-on shares can be pre-configured.</li>
+              <li>
+                Auction mechanics & re-sale fees etc can be pre-configured
+                during the creation process.
+              </li>
             </ul>
           </li>
           <li>
@@ -80,7 +91,10 @@ const Notes: FunctionComponent = () => {
                 Includes more artist-specific metadata on the pages and handles
                 paying individual artists directly.
               </li>
-              <li>Sell-on shares can be pre-configured.</li>
+              <li>
+                Auction mechanics & re-sale fees etc can be pre-configured
+                during the creation process.
+              </li>
             </ul>
           </li>
           <li>
@@ -91,7 +105,7 @@ const Notes: FunctionComponent = () => {
             </ul>
           </li>
           <li>
-            The Banker
+            Banker
             <ul>
               <li>
                 Automated payment splits. Configure different percentages to go
@@ -127,10 +141,10 @@ const Notes: FunctionComponent = () => {
       </div>
 
       <div className="section">
-        <div className="section-title">Potential Issues</div>
+        <div className="section-title">Things To Consider Still</div>
         <ul>
           <li>
-            Might not be possible to decentralize 100% of the Factory service
+            It might not be possible to decentralize 100% of the Factory service
             <ul>
               <li>
                 IPFS server
@@ -204,6 +218,56 @@ const Notes: FunctionComponent = () => {
               </li>
             </ul>
           </li>
+
+          <li>
+            What's the right level of flexibility to offer in customization for
+            things?
+            <ul>
+              <li>
+                Each customization option adds complexity which needs to be
+                designed, tested, and maintained.
+              </li>
+              <li>
+                Because users will get the original source code for their site,
+                they can customize it entirely if they have React experience or
+                can find a React developer to help them.
+              </li>
+              <li>
+                It seems ideal to keep options limited to start and focus on
+                things that are high variance + very easy to test (like colors
+                or re-sale fees), and less on things like layouts or
+                functionality.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            What's the right approach to make this genuinely useful to people
+            over time?
+            <ul>
+              <li>
+                This project is still in an "explore things, have fun, and
+                consider the possibilities" phase, but hopefully at some point
+                transitions into a useful & production-ready service.
+              </li>
+              <li>
+                Ideally Factory can be developed in public, with a community of
+                interested users to help guide things with feedback, suggestions
+                and testing.
+              </li>
+              <li>
+                It'd be possible to utilize DAO concepts (
+                <a href="https://aragon.org/dao" target="_blank">
+                  here's a nice explainer page
+                </a>
+                ) to fund development, make decisions with community support,
+                incentivize early adopters, etc. I haven't done enough research
+                yet to have any idea of what the right approach would look like
+                for something like this. It's likely only worth doing if our
+                model can be made easy to explain & understand.
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
 
@@ -248,4 +312,4 @@ const Notes: FunctionComponent = () => {
   );
 };
 
-export default Notes;
+export default NotesPage;

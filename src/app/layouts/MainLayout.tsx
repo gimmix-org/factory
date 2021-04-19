@@ -64,7 +64,7 @@ const MainLayout: FunctionComponent = ({ children }) => {
         .main-layout {
           display: flex;
           flex-direction: column;
-          width: 100vw;
+          width: 100%;
           min-height: 100vh;
         }
         header {
