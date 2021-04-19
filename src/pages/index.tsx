@@ -1,33 +1,66 @@
 import React, { FunctionComponent } from 'react';
-import FactoryLayout from '@app/layouts/FactoryLayout';
 import Link from 'next/link';
 
 const Factory: FunctionComponent = () => {
   return (
-    <FactoryLayout>
-      <Link href="/create/portfolio">
-        <a className="link">Portfolio (Alpha)</a>
-      </Link>
+    <div className="page">
+      <div className="page-title">What do you want to make?</div>
+      <div className="generators">
+        <Link href="/create/portfolio">
+          <a className="generator">
+            <div className="title">Portfolio</div>
+            <div className="status">Alpha</div>
+          </a>
+        </Link>
+      </div>
+
       <style jsx>{`
-        .link {
-          text-align: center;
-          font-size: 32px;
-          text-transform: uppercase;
-          padding: 10px 20px;
+        .page {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+        .page-title {
+          font-weight: 500;
+          font-size: 24px;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+        .generators {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .generator {
+          width: 200px;
+          height: 200px;
+          padding: 15px;
           background-color: ghostwhite;
           color: black;
-          display: inline-block;
           border: 3px solid black;
-          margin: 10px;
+          margin: 5px;
+          transition: 100ms transform;
         }
-
-        .link:hover {
-          background-color: black;
-          color: ghostwhite;
+        .generator:hover {
+          transform: translateY(-3px);
           text-decoration: none;
+          color: blueviolet;
+        }
+        .title {
+          font-weight: 500;
+          font-size: 24px;
+        }
+        .status {
+          font-size: 14px;
+          opacity: 0.7;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+            'Segoe UI Symbol';
         }
       `}</style>
-    </FactoryLayout>
+    </div>
   );
 };
 

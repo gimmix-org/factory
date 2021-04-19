@@ -13,59 +13,65 @@ const MainLayout: FunctionComponent = ({ children }) => {
           rel="stylesheet"
         />
       </Head>
-      <div className="info-bar">
-        This is an experimental tool to design and deploy customized smart
-        contracts. It is not production ready!
-        <div className="stripes">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-            <defs>
-              <pattern
-                id="pattern_Z4YTl"
-                patternUnits="userSpaceOnUse"
-                width="5"
-                height="5"
-                patternTransform="rotate(75)"
-              >
-                <line
-                  x1="0"
-                  y="0"
-                  x2="0"
-                  y2="5"
-                  stroke="ghostwhite"
-                  strokeWidth="5"
-                />
-              </pattern>
-            </defs>
-            <rect
-              width="100%"
-              height="100%"
-              fill="url(#pattern_Z4YTl)"
-              opacity="0.1"
-            />
-          </svg>
-        </div>
-      </div>
       <header>
-        <div>
-          <Link href="/">
-            <a className="factory">FACTORY</a>
-          </Link>
+        <div className="info-bar">
+          This is an experimental tool to customize and launch your own
+          decentralized / web3 / nft site. It is not production ready!
+          <div className="stripes">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <defs>
+                <pattern
+                  id="pattern_Z4YTl"
+                  patternUnits="userSpaceOnUse"
+                  width="5"
+                  height="5"
+                  patternTransform="rotate(75)"
+                >
+                  <line
+                    x1="0"
+                    y="0"
+                    x2="0"
+                    y2="5"
+                    stroke="ghostwhite"
+                    strokeWidth="5"
+                  />
+                </pattern>
+              </defs>
+              <rect
+                width="100%"
+                height="100%"
+                fill="url(#pattern_Z4YTl)"
+                opacity="0.1"
+              />
+            </svg>
+          </div>
         </div>
-        <div>
-          <ConnectWalletButton />
+        <div className="header">
+          <div>
+            <Link href="/">
+              <a className="factory">FACTORY</a>
+            </Link>
+          </div>
+          <div>
+            <ConnectWalletButton />
+          </div>
         </div>
       </header>
 
       <main>{children}</main>
 
-      <footer>GIMMIX © MMXXI</footer>
       <style jsx>{`
         .main-layout {
           display: flex;
           flex-direction: column;
           width: 100vw;
-          height: 100vh;
-          background-color: ghostwhite;
+          min-height: 100vh;
+        }
+        header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
         }
         .info-bar {
           padding: 5px 20px;
@@ -78,7 +84,7 @@ const MainLayout: FunctionComponent = ({ children }) => {
           position: relative;
           overflow: hidden;
         }
-        header {
+        .header {
           padding: 10px 20px;
           display: flex;
           justify-content: space-between;
@@ -98,6 +104,9 @@ const MainLayout: FunctionComponent = ({ children }) => {
         }
         main {
           flex: 1 1 auto;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 100px 0;
         }
         footer {
           position: fixed;
@@ -112,10 +121,17 @@ const MainLayout: FunctionComponent = ({ children }) => {
           box-sizing: border-box;
           margin: 0;
           padding: 0;
+        }
+        html,
+        body,
+        input,
+        textarea,
+        button {
           font-family: 'Space Grotesk', sans-serif;
         }
         html,
         body {
+          background-color: ghostwhite;
         }
         a {
           color: inherit;
@@ -123,12 +139,6 @@ const MainLayout: FunctionComponent = ({ children }) => {
         }
         a:hover {
           text-decoration: underline;
-        }
-        h1,
-        h2,
-        h3 {
-          font-weight: normal;
-          margin-bottom: 20px;
         }
       `}</style>
     </div>

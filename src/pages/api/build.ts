@@ -6,7 +6,8 @@ const api: NextApiHandler = async (req, res) => {
     method: 'POST',
     body: JSON.stringify({ config }),
     headers: { 'content-type': 'application/json' }
-  }).then(res => res.json());
+  }).then(res => res.text());
+  console.log({ response });
   return res.json(response);
 };
 

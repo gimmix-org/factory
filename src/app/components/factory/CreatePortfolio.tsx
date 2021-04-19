@@ -1,4 +1,9 @@
-import React, { FormEventHandler, FunctionComponent, useState } from 'react';
+import React, {
+  FormEventHandler,
+  FunctionComponent,
+  useEffect,
+  useState
+} from 'react';
 import Addresses from '@gimmixfactory/contracts/dist/addresses';
 import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
@@ -10,6 +15,8 @@ const CreatePortfolio: FunctionComponent = () => {
   const { network, provider, account } = useWallet();
   const [contractAddress, setContractAddress] = useState<string>();
   const [siteBuilt, setSiteBuilt] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   const onDeployClick: FormEventHandler = async e => {
     e.preventDefault();
     if (
@@ -19,13 +26,19 @@ const CreatePortfolio: FunctionComponent = () => {
       !account
     )
       return;
+
     setError(undefined);
     const deployer = Deployer__factory.connect(
       Addresses[network.name.toLowerCase()].deployer,
       provider.getSigner()
     );
     try {
-      const tx = await deployer.createERC721(name, symbol.toUpperCase());
+      const tx = await deployer.createPortfolio(
+        name,
+        symbol.length
+          ? symbol.toUpperCase()
+          : name.replace(/ /g, '').toUpperCase()
+      );
       console.log(tx);
       await tx.wait(1);
       const contractAddress = await deployer.contracts(account);
@@ -65,77 +78,88 @@ const CreatePortfolio: FunctionComponent = () => {
   };
 
   return (
-    <div className="create-contract">
-      <div className="section">
-        <h1>Design your Portfolio</h1>
-        <form onSubmit={onDeployClick}>
-          <div className="form-section">
-            <h3>Smart Contract</h3>
-            <div className="form-item">
-              <label>Name</label>
-              <input
-                type="text"
-                placeholder="Name..."
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-                minLength={3}
-              />
-            </div>
-            <div className="form-item">
-              <label>Symbol</label>
-              <input
-                type="text"
-                placeholder="Symbol name..."
-                value={symbol}
-                onChange={e => setSymbol(e.target.value.toUpperCase())}
-                required
-                minLength={3}
-              />
-            </div>
-          </div>
-          {contractAddress && (
+    <div className="page">
+      <div className="page-title">Customize Your Portfolio</div>
+      <div className="create-form">
+        <div className="section">
+          <form onSubmit={onDeployClick}>
             <div className="form-section">
-              <h3>Your Website</h3>
-              {!siteBuilt ? (
-                <>Building...</>
-              ) : (
-                <>
-                  <a
-                    href={`https://factory-sites.gimmix.org/api/build?contractAddress=${contractAddress}`}
-                    target="_blank"
-                  >
-                    Download
-                  </a>
-                </>
+              <div className="form-item">
+                <label>Name</label>
+                <input
+                  type="text"
+                  placeholder="Name..."
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  minLength={3}
+                />
+              </div>
+              {showAdvanced && (
+                <div className="form-item">
+                  <label>Symbol</label>
+                  <input
+                    type="text"
+                    placeholder="Symbol name..."
+                    value={symbol}
+                    onChange={e => setSymbol(e.target.value.toUpperCase())}
+                    required
+                    minLength={3}
+                  />
+                </div>
               )}
             </div>
-          )}
-          <div className="form-section">
-            <div className="form-item">
-              <button disabled={!network} type="submit">
-                Deploy
-              </button>
-            </div>
-          </div>
-        </form>
+
+            {contractAddress && (
+              <div className="form-section">
+                <h3>Your Website</h3>
+                {!siteBuilt ? (
+                  <>Building...</>
+                ) : (
+                  <>
+                    <a
+                      href={`https://factory-sites.gimmix.org/api/build?contractAddress=${contractAddress}`}
+                      target="_blank"
+                    >
+                      Download
+                    </a>
+                  </>
+                )}
+              </div>
+            )}
+
+            <button disabled={!network} type="submit">
+              Deploy
+            </button>
+          </form>
+        </div>
+        {error && <div className="error">{error}</div>}
       </div>
-      {error && <div className="error">{error}</div>}
       <style jsx>{`
-        .create-contract {
-          max-width: 700px;
-          width: 100%;
-          margin: 0 auto;
+        .page {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+        }
+        .page-title {
+          font-weight: 500;
+          font-size: 24px;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+
+        .create-form {
           padding: 20px;
-          border: 2px solid black;
+          min-width: 400px;
+          border: 3px solid black;
         }
         .title {
           font-size: 18px;
           margin-bottom: 20px;
         }
         .form-section {
-          padding: 10px;
-          border: 1px solid #999;
           margin-bottom: 20px;
         }
         .form-item {
@@ -150,6 +174,9 @@ const CreatePortfolio: FunctionComponent = () => {
           padding: 5px;
           font-size: 14px;
           text-align: center;
+        }
+        input {
+          padding: 5px;
         }
       `}</style>
     </div>
