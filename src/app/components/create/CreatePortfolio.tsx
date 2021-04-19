@@ -59,7 +59,7 @@ const CreatePortfolio = () => {
             : null
       };
       const { built } = await fetch(
-        'https://factory-sites.gimmix.org/api/build',
+        'https://factory-sites.vercel.app/api/build',
         {
           method: 'POST',
           body: JSON.stringify({ config }),
