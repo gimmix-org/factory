@@ -1,5 +1,8 @@
 import React, { FormEventHandler, useState } from 'react';
-import Addresses from '@gimmixfactory/contracts/dist/addresses';
+import {
+  getAddressesForChainId,
+  SupportedChainIds
+} from '@gimmixfactory/contracts/dist/addresses';
 import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
 import ConnectWalletButton from '@app/components/wallet/ConnectWalletButton';
@@ -15,19 +18,13 @@ const CreatePortfolio = () => {
   const [showAdvanced, _setShowAdvanced] = useState(false);
 
   const onDeployClick: FormEventHandler = async e => {
-    console.log(e);
     e.preventDefault();
-    if (
-      !network?.name ||
-      !Addresses[network?.name.toLowerCase()] ||
-      !provider ||
-      !account
-    )
-      return;
-
+    if (!network || !provider || !account) return;
+    const addresses = getAddressesForChainId(network.chainId);
+    if (!addresses) return;
     setError(undefined);
     const deployer = Deployer__factory.connect(
-      Addresses[network.name.toLowerCase()].deployer,
+      addresses.deployer,
       provider.getSigner()
     );
     try {
@@ -88,7 +85,7 @@ const CreatePortfolio = () => {
               <FormItemTextInput
                 label="Set a Name"
                 description="This can be your name, the name of your business, the name of
-                  a collection you'd like to share, etc."
+                  a collection you'd like to share, etc. This will appear on your Portfolio and anywhere your NFT collection is seen."
                 value={name}
                 setValue={setName}
                 inputProps={{
@@ -132,8 +129,13 @@ const CreatePortfolio = () => {
 
             {!network ? (
               <ConnectWalletButton text={`Connect Your Wallet to Deploy`} />
-            ) : (
+            ) : SupportedChainIds.includes(network.chainId) ? (
               <button type="submit">Deploy to {network.name}</button>
+            ) : (
+              <div className="wrong-network">
+                Switch to a supported network (Rinkeby, Goerli, Mumbai) in your
+                Wallet.
+              </div>
             )}
           </form>
         </div>

@@ -40,6 +40,7 @@ const FormItemTextInput = ({
           margin-bottom: 10px;
           font-size: 14px;
           color: #777;
+          line-height: 1.4em;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
             Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
             'Segoe UI Symbol';

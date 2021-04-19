@@ -408,10 +408,10 @@
   dependencies:
     "@ethersproject/logger" "^5.1.0"
 
-"@ethersproject/providers@5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.1.1.tgz#a72f446ee0ddd93eb8f7d86178629565c03b55b6"
-  integrity sha512-+xWqQh4eLnAePRR5CHSySCVke//NxGSuQEUzGTdDtt0yCbizwlKGm7CrsU0zF8JUcKDrDh36ezzTicOMd5sl9w==
+"@ethersproject/providers@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.1.0.tgz#27695a02cfafa370428cde1c7a4abab13afb6a35"
+  integrity sha512-FjpZL2lSXrYpQDg2fMjugZ0HjQD9a+2fOOoRhhihh+Z+qi/xZ8vIlPoumrEP1DzIG4DBV6liUqLNqnX2C6FIAA==
   dependencies:
     "@ethersproject/abstract-provider" "^5.1.0"
     "@ethersproject/abstract-signer" "^5.1.0"
@@ -433,10 +433,10 @@
     bech32 "1.1.4"
     ws "7.2.3"
 
-"@ethersproject/providers@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.1.0.tgz#27695a02cfafa370428cde1c7a4abab13afb6a35"
-  integrity sha512-FjpZL2lSXrYpQDg2fMjugZ0HjQD9a+2fOOoRhhihh+Z+qi/xZ8vIlPoumrEP1DzIG4DBV6liUqLNqnX2C6FIAA==
+"@ethersproject/providers@5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.1.1.tgz#a72f446ee0ddd93eb8f7d86178629565c03b55b6"
+  integrity sha512-+xWqQh4eLnAePRR5CHSySCVke//NxGSuQEUzGTdDtt0yCbizwlKGm7CrsU0zF8JUcKDrDh36ezzTicOMd5sl9w==
   dependencies:
     "@ethersproject/abstract-provider" "^5.1.0"
     "@ethersproject/abstract-signer" "^5.1.0"
@@ -596,18 +596,19 @@
     "@ethersproject/properties" "^5.1.0"
     "@ethersproject/strings" "^5.1.0"
 
-"@gimmixfactory/contracts@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@gimmixfactory/contracts/-/contracts-0.0.7.tgz#065bd6462d4ae60558cc21b6fdab4f7232d2dfeb"
-  integrity sha512-3/vIvbdLI4d+62oUMnwBktG9+AiuI1PVQUyN+z9d/efNbf8AmA6Hhk55SmhLZuHT4KsHDxKsONeY7ET4u+ppGQ==
+"@gimmixfactory/contracts@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@gimmixfactory/contracts/-/contracts-0.0.9.tgz#3e7bf5f10096aa701050a4960485b666f2686c2b"
+  integrity sha512-LbHq+uz9eXlkJXz/eQYk0ZU2Rog2vDHWu+MtD1CsqnIG9PDc7BPFe2mUAuQxYTNr8I3oZLWPjcIwJkxrRmGjFQ==
 
-"@gimmixfactory/use-wallet@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@gimmixfactory/use-wallet/-/use-wallet-0.0.11.tgz#9a81ee12e2af708499b7b4d018e8ed239a3e7b27"
-  integrity sha512-rXqueJLFXk5/ffW0UCm9s9Lr1J56iUUO3taE62IMYKQdFedXRlpPllt5ZoMUILDg9JsLqItbmdhmd8I+RmJyxA==
+"@gimmixfactory/use-wallet@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@gimmixfactory/use-wallet/-/use-wallet-0.0.19.tgz#9e9a9f803097fe83f59f20880b0c3aef0708927a"
+  integrity sha512-uZ7xw2nAtnB6jQnB095QsYiIytrEE9xkBLW4CS5ZcOdsR4dMwxIQ5N73UqsAUGBZ0jr5k1Ey4zwzdxngKk0BVw==
   dependencies:
-    "@ethersproject/providers" "^5.1.0"
+    "@ethersproject/providers" "5.1.0"
     web3modal "^1.9.3"
+    zustand "^3.4.1"
 
 "@hapi/accept@5.0.1":
   version "5.0.1"

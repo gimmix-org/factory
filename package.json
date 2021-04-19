@@ -7,8 +7,8 @@
     "start": "next"
   },
   "dependencies": {
-    "@gimmixfactory/contracts": "^0.0.7",
-    "@gimmixfactory/use-wallet": "^0.0.11",
+    "@gimmixfactory/contracts": "^0.0.9",
+    "@gimmixfactory/use-wallet": "^0.0.19",
     "@walletconnect/web3-provider": "^1.4.1",
     "ethers": "^5.1.2",
     "next": "^10.1.3",

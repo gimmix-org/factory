@@ -3,7 +3,7 @@ import { useWallet } from '@gimmixfactory/use-wallet';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
 const ConnectWalletButton = ({ text }: { text?: string }) => {
-  const { connect, account, network } = useWallet();
+  const { connect, account, network, disconnect } = useWallet();
 
   const onConnectClick = async () => {
     const providerOptions = {
@@ -25,6 +25,9 @@ const ConnectWalletButton = ({ text }: { text?: string }) => {
           <div className="address">
             {account.slice(0, 6)}...{account.slice(-4)}
           </div>
+          <button type="button" onClick={() => disconnect()}>
+            Disconnect
+          </button>
         </div>
       ) : (
         <div className="connect-wallet">
@@ -59,6 +62,7 @@ const ConnectWalletButton = ({ text }: { text?: string }) => {
           border-radius: 3px;
           border: 1px solid blueviolet;
           color: blueviolet;
+          margin-right: 5px;
         }
         .network {
           background-color: blueviolet;
