@@ -1,9 +1,4 @@
-import React, {
-  FormEventHandler,
-  FunctionComponent,
-  useEffect,
-  useState
-} from 'react';
+import React, { FormEventHandler, FunctionComponent, useState } from 'react';
 import Addresses from '@gimmixfactory/contracts/dist/addresses';
 import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
@@ -15,7 +10,7 @@ const CreatePortfolio: FunctionComponent = () => {
   const { network, provider, account } = useWallet();
   const [contractAddress, setContractAddress] = useState<string>();
   const [siteBuilt, setSiteBuilt] = useState(false);
-  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showAdvanced, _setShowAdvanced] = useState(false);
 
   const onDeployClick: FormEventHandler = async e => {
     e.preventDefault();
