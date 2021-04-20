@@ -1,4 +1,4 @@
-# Factory
+# FACTORY
 
 > This repo has the main UI for the service.
 
