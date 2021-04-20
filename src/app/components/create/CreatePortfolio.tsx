@@ -42,13 +42,12 @@ const CreatePortfolio = () => {
         template: 'portfolio',
         name: name,
         description: `The portfolio of ${name}.`,
-        url: 'http://localhost:3000',
         contractAddress,
         creatorAddress: account,
         chainId: network.chainId,
         ipfsBase: 'https://cloudflare-ipfs.com/ipfs/',
-        ipfsUploadFile: 'https://factory-ipfs.gimmix.org/upload/',
-        ipfsUploadJson: 'https://factory-ipfs.gimmix.org/uploadJSON/',
+        ipfsUploadFile: `${process.env.NEXT_PUBLIC_IPFS_SERVER}/upload/`,
+        ipfsUploadJson: `${process.env.NEXT_PUBLIC_IPFS_SERVER}/uploadJSON/`,
         rpcUrl:
           network.chainId == 4
             ? process.env.NEXT_PUBLIC_RPC_4
@@ -59,7 +58,7 @@ const CreatePortfolio = () => {
             : null
       };
       const { built } = await fetch(
-        'https://factory-sites.gimmix.org/api/build',
+        `${process.env.NEXT_PUBLIC_BUILD_SERVER}/api/build`,
         {
           method: 'POST',
           body: JSON.stringify({ config }),
@@ -69,8 +68,10 @@ const CreatePortfolio = () => {
       console.log({ built });
       setSiteBuilt(built);
       const ipfsInfo = await fetch(
-        `https://factory-ipfs.gimmix.org/uploadSite?buildURL=${encodeURIComponent(
-          `https://factory-sites.gimmix.org/api/build?contractAddress=${contractAddress}`
+        `${
+          process.env.NEXT_PUBLIC_IPFS_SERVER
+        }/uploadSite?buildURL=${encodeURIComponent(
+          `${process.env.NEXT_PUBLIC_BUILD_SERVER}/api/build?contractAddress=${contractAddress}`
         )}`
       ).then(res => res.json());
       console.log({ ipfsInfo });
@@ -123,7 +124,7 @@ const CreatePortfolio = () => {
                 ) : (
                   <>
                     <a
-                      href={`https://factory-sites.gimmix.org/api/build?contractAddress=${contractAddress}`}
+                      href={`${process.env.NEXT_PUBLIC_IPFS_SERVER}/api/build?contractAddress=${contractAddress}`}
                       target="_blank"
                     >
                       Download
