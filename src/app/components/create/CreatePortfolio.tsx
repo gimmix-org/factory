@@ -16,7 +16,8 @@ const CreatePortfolio = () => {
   const { network, provider, account } = useWallet();
   const [contractAddress, setContractAddress] = useState<string>();
   const [showAdvanced, _setShowAdvanced] = useState(false);
-  const [job, setJob] = useState<any>();
+  const [_job, setJob] = useState<any>();
+
   const onDeployClick: FormEventHandler = async e => {
     e.preventDefault();
     if (!network || !provider || !account) return;
