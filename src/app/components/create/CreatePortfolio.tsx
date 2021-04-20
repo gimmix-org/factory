@@ -50,7 +50,7 @@ const CreatePortfolio = () => {
         contractAddress,
         creatorAddress: account,
         chainId: network.chainId,
-        ipfsBase: 'https://cloudflare-ipfs.com/ipfs/',
+        ipfsBase: 'https://ipfs.io/ipfs/',
         ipfsUploadFile: `${process.env.NEXT_PUBLIC_IPFS_SERVER}/upload/`,
         ipfsUploadJson: `${process.env.NEXT_PUBLIC_IPFS_SERVER}/uploadJSON/`,
         rpcUrl:
