@@ -7,6 +7,7 @@ import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
 import ConnectWalletButton from '@app/components/wallet/ConnectWalletButton';
 import FormItemTextInput from '@app/components/forms/FormItemTextInput';
+import BuildStatus from '../BuildStatus';
 
 const CreatePortfolio = () => {
   const [name, setName] = useState('');
@@ -14,9 +15,8 @@ const CreatePortfolio = () => {
   const [error, setError] = useState<string>();
   const { network, provider, account } = useWallet();
   const [contractAddress, setContractAddress] = useState<string>();
-  const [siteBuilt, setSiteBuilt] = useState(false);
   const [showAdvanced, _setShowAdvanced] = useState(false);
-
+  const [job, setJob] = useState<any>();
   const onDeployClick: FormEventHandler = async e => {
     e.preventDefault();
     if (!network || !provider || !account) return;
@@ -38,6 +38,7 @@ const CreatePortfolio = () => {
       await tx.wait(1);
       const contractAddress = await deployer.contracts(account);
       setContractAddress(contractAddress);
+
       const config = {
         template: 'portfolio',
         name: name,
@@ -57,24 +58,20 @@ const CreatePortfolio = () => {
             ? process.env.NEXT_PUBLIC_RPC_80001
             : null
       };
-      const { built } = await fetch(
-        `${process.env.NEXT_PUBLIC_BUILD_SERVER}/api/build`,
-        {
-          method: 'POST',
-          body: JSON.stringify({ config }),
-          headers: { 'content-type': 'application/json' }
-        }
-      ).then(res => res.json());
-      console.log({ built });
-      setSiteBuilt(built);
-      const ipfsInfo = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_IPFS_SERVER
-        }/uploadSite?buildURL=${encodeURIComponent(
-          `${process.env.NEXT_PUBLIC_BUILD_SERVER}/api/build?contractAddress=${contractAddress}`
-        )}`
-      ).then(res => res.json());
-      console.log({ ipfsInfo });
+      const job = await fetch(`${process.env.NEXT_PUBLIC_BUILD_SERVER}/build`, {
+        method: 'POST',
+        body: JSON.stringify({ config }),
+        headers: { 'content-type': 'application/json' }
+      }).then(res => res.json());
+      setJob(job);
+      // const ipfsInfo = await fetch(
+      //   `${
+      //     process.env.NEXT_PUBLIC_IPFS_SERVER
+      //   }/uploadSite?buildURL=${encodeURIComponent(
+      //     `${process.env.NEXT_PUBLIC_BUILD_SERVER}/build?contractAddress=${contractAddress}&template=portfolio`
+      //   )}`
+      // ).then(res => res.json());
+      // console.log({ ipfsInfo });
     } catch (err) {
       setError(
         err.error?.message?.replace('execution reverted: ', '') || err.message
@@ -116,33 +113,24 @@ const CreatePortfolio = () => {
               )}
             </div>
 
-            {contractAddress && (
+            {contractAddress ? (
               <div className="form-section">
                 <>Contract: {contractAddress}</>
-                {!siteBuilt ? (
-                  <>Building...</>
-                ) : (
-                  <>
-                    <a
-                      href={`${process.env.NEXT_PUBLIC_IPFS_SERVER}/api/build?contractAddress=${contractAddress}`}
-                      target="_blank"
-                    >
-                      Download
-                    </a>
-                  </>
-                )}
+                <BuildStatus contractAddress={contractAddress} />
               </div>
-            )}
-
-            {!network ? (
-              <ConnectWalletButton text={`Connect Your Wallet to Deploy`} />
-            ) : SupportedChainIds.includes(network.chainId) ? (
-              <button type="submit">Deploy to {network.name}</button>
             ) : (
-              <div className="wrong-network">
-                Switch to a supported network (Rinkeby, Goerli, Mumbai) in your
-                Wallet.
-              </div>
+              <>
+                {!network ? (
+                  <ConnectWalletButton text={`Connect Your Wallet to Deploy`} />
+                ) : SupportedChainIds.includes(network.chainId) ? (
+                  <button type="submit">Deploy to {network.name}</button>
+                ) : (
+                  <div className="wrong-network">
+                    Switch to a supported network (Rinkeby, Goerli, Mumbai) in
+                    your Wallet.
+                  </div>
+                )}
+              </>
             )}
           </form>
         </div>
