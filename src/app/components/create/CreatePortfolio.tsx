@@ -46,7 +46,7 @@ const CreatePortfolio = () => {
         contractAddress,
         creatorAddress: account,
         chainId: network.chainId,
-        ipfsBase: 'https://factory-ipfs.gimmix.org/ipfs/',
+        ipfsBase: 'https://cloudflare-ipfs.com/ipfs/',
         ipfsUploadFile: 'https://factory-ipfs.gimmix.org/upload/',
         ipfsUploadJson: 'https://factory-ipfs.gimmix.org/uploadJSON/',
         rpcUrl:
@@ -68,6 +68,12 @@ const CreatePortfolio = () => {
       ).then(res => res.json());
       console.log({ built });
       setSiteBuilt(built);
+      const ipfsInfo = await fetch(
+        `https://factory-ipfs.gimmix.org/uploadSite?buildURL=${encodeURIComponent(
+          `https://factory-sites.gimmix.org/api/build?contractAddress=${contractAddress}`
+        )}`
+      ).then(res => res.json());
+      console.log({ ipfsInfo });
     } catch (err) {
       setError(
         err.error?.message?.replace('execution reverted: ', '') || err.message
@@ -111,7 +117,7 @@ const CreatePortfolio = () => {
 
             {contractAddress && (
               <div className="form-section">
-                <h3>Your Website</h3>
+                <>Contract: {contractAddress}</>
                 {!siteBuilt ? (
                   <>Building...</>
                 ) : (
