@@ -3,6 +3,7 @@ import React from 'react';
 
 const BuildStatus = ({ contractAddress }: { contractAddress: string }) => {
   const job = useBuildStatus(contractAddress);
+  if (!job) return null;
   return (
     <div className="build-status">
       {!job.finishedOn ? (

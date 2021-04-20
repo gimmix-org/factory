@@ -14,6 +14,7 @@ const CreatePortfolio = () => {
   const [symbol, setSymbol] = useState('');
   const [error, setError] = useState<string>();
   const { network, provider, account } = useWallet();
+  const [txHash, setTXHash] = useState<string>();
   const [contractAddress, setContractAddress] = useState<string>();
   const [showAdvanced, _setShowAdvanced] = useState(false);
   const [_job, setJob] = useState<any>();
@@ -35,6 +36,8 @@ const CreatePortfolio = () => {
           ? symbol.toUpperCase()
           : name.replace(/ /g, '').toUpperCase()
       );
+      setTXHash(tx.hash);
+
       console.log(tx);
       await tx.wait(1);
       const contractAddress = await deployer.contracts(account);
@@ -119,6 +122,8 @@ const CreatePortfolio = () => {
                 <>Contract: {contractAddress}</>
                 <BuildStatus contractAddress={contractAddress} />
               </div>
+            ) : txHash ? (
+              <>Deploying.... (TX Hash: {txHash})</>
             ) : (
               <>
                 {!network ? (
