@@ -14,7 +14,7 @@ const ConnectWalletButton = ({ text }: { text?: string }) => {
         }
       }
     };
-    connect(providerOptions);
+    connect({ providerOptions });
   };
 
   return (
