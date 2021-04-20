@@ -12,7 +12,7 @@ const BuildStatus = ({ contractAddress }: { contractAddress: string }) => {
         <a
           href={job.returnvalue.ipfsUrl.replace(
             'ipfs://',
-            'https://cloudflare-ipfs.com/ipfs/'
+            'https://ipfs.io/ipfs/'
           )}
           target="_blank"
           className="preview"
