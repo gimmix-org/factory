@@ -105,7 +105,7 @@ const CreatePortfolio = () => {
           <form onSubmit={onDeployClick}>
             <div className="form-section">
               <FormItemTextInput
-                label="Set a Name"
+                label="Set a name"
                 description="This can be your name, the name of your business, the name of
                   a collection you'd like to share, etc. This will appear on your Portfolio and anywhere your NFT collection is seen."
                 value={name}

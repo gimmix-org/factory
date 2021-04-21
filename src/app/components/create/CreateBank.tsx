@@ -124,8 +124,8 @@ const CreateBank: FunctionComponent = () => {
           <form onSubmit={onDeployClick}>
             <div className="form-section">
               <FormItemTextInput
-                label="Set a Name"
-                description="This will be displayed on your site but won't appear elsewhere."
+                label="Set a name"
+                description="This will be displayed on your site so it's easy to figure out which Bank it is, but won't appear in transactions or anywhere else."
                 value={name}
                 setValue={setName}
                 inputProps={{
@@ -138,7 +138,7 @@ const CreateBank: FunctionComponent = () => {
 
             <div className="form-section">
               <FormItemAddresses
-                label="Set addresses"
+                label="Set addresses to include"
                 description={`Add the addresses you'd like to share this bank with.${
                   account
                     ? ` Your own address has been added by default but can be removed.`
@@ -152,7 +152,7 @@ const CreateBank: FunctionComponent = () => {
             {addresses.length > 0 && (
               <div className="form-section">
                 <FormItemAddressShares
-                  label="Set shares"
+                  label="Set shares for each address"
                   description={`Set the shares you'd like to assign to each address. By default, each address is assigned 1 share for an equal split across all address.`}
                   addresses={addresses}
                   shares={shares}
@@ -161,7 +161,7 @@ const CreateBank: FunctionComponent = () => {
               </div>
             )}
 
-            {shares.length > 0 && (
+            {addresses.length > 0 && shares.length > 0 && (
               <div className="form-section">
                 <FormItemPieChart
                   label="Preview splits"
