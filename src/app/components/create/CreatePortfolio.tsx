@@ -17,7 +17,7 @@ const CreatePortfolio = () => {
   const [txHash, setTXHash] = useState<string>();
   const [contractAddress, setContractAddress] = useState<string>();
   const [showAdvanced, _setShowAdvanced] = useState(false);
-  const [buildJob, setBuildJob] = useState<any>();
+  const [_buildJob, setBuildJob] = useState<any>();
 
   const onDeployClick: FormEventHandler = async e => {
     e.preventDefault();

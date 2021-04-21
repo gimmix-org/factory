@@ -26,7 +26,7 @@ const CreateBank: FunctionComponent = () => {
 
   const [txHash, setTXHash] = useState<string>();
   const [contractAddress, setContractAddress] = useState<string>();
-  const [buildJob, setBuildJob] = useState<any>();
+  const [_buildJob, setBuildJob] = useState<any>();
   const [error, setError] = useState<string>();
 
   useEffect(() => {
