@@ -620,10 +620,10 @@
     "@ethersproject/properties" "^5.1.0"
     "@ethersproject/strings" "^5.1.0"
 
-"@gimmixfactory/contracts@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@gimmixfactory/contracts/-/contracts-0.0.9.tgz#3e7bf5f10096aa701050a4960485b666f2686c2b"
-  integrity sha512-LbHq+uz9eXlkJXz/eQYk0ZU2Rog2vDHWu+MtD1CsqnIG9PDc7BPFe2mUAuQxYTNr8I3oZLWPjcIwJkxrRmGjFQ==
+"@gimmixfactory/contracts@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@gimmixfactory/contracts/-/contracts-0.0.14.tgz#e7435d59c7e3a910d8ebb0d8f0ec3decae777f71"
+  integrity sha512-pfuiUpzF8bBKPzzu9OHvB/yi7Tn10se+iltNwV5R8ifuLbJl4qyz1WSdi6FIodD2hG645E5eLWxBJnfhxa4oEA==
 
 "@gimmixfactory/use-wallet@^0.0.21":
   version "0.0.21"
@@ -3451,6 +3451,11 @@ react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-minimal-pie-chart@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/react-minimal-pie-chart/-/react-minimal-pie-chart-8.2.0.tgz#22b53af2363f040d818331721658dfa7a1ea847a"
+  integrity sha512-RhrHzprJt3KfBe4L3sE0Ha6fj4kYcwQtesQgscnld9Umf64+nZnxxInycnbimKsbIjxJONv77JIZp+qRbJD+bA==
 
 react-refresh@0.8.3:
   version "0.8.3"

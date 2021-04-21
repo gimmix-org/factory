@@ -8,7 +8,14 @@ const IndexPage = () => {
         <Link href="/create/portfolio">
           <a className="generator">
             <div className="title">Portfolio</div>
-            <div className="status">Alpha</div>
+            <div className="status">v0.0.1</div>
+          </a>
+        </Link>
+
+        <Link href="/create/bank">
+          <a className="generator">
+            <div className="title">Bank</div>
+            <div className="status">v0.0.1</div>
           </a>
         </Link>
       </div>

@@ -17,9 +17,9 @@ const FormItemTextInput = ({
   >;
 }) => {
   return (
-    <div className="form-item">
+    <>
       <label>{label}</label>
-      <div className="label-description">{description}</div>
+      <div className="description">{description}</div>
       <input
         type="text"
         value={value}
@@ -36,7 +36,7 @@ const FormItemTextInput = ({
           font-size: 18px;
           display: block;
         }
-        .label-description {
+        .description {
           margin-bottom: 10px;
           font-size: 14px;
           color: #777;
@@ -49,9 +49,11 @@ const FormItemTextInput = ({
           padding: 5px;
           width: 100%;
           font-size: 16px;
+          border: 1px solid #aaa;
+          outline: none;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 
