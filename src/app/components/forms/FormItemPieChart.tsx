@@ -82,6 +82,9 @@ const FormItemPieChart = ({
           padding: 10px;
           border-bottom: 1px solid #ccc;
         }
+        .table-item:last-of-type {
+          border-bottom: none;
+        }
         .table-item-value {
           font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
             Courier, monospace;

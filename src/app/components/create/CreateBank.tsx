@@ -4,18 +4,14 @@ import React, {
   useEffect,
   useState
 } from 'react';
-import {
-  getAddressesForChainId,
-  SupportedChainIds
-} from '@gimmixfactory/contracts/dist/addresses';
+import { getAddressesForChainId } from '@gimmixfactory/contracts/dist/addresses';
 import { Deployer__factory } from '@gimmixfactory/contracts/dist/typechain';
 import { useWallet } from '@gimmixfactory/use-wallet';
-import BuildStatus from '@app/components/create/BuildStatus';
 import FormItemAddresses from '@app/components/forms/FormItemAddresses';
 import FormItemTextInput from '@app/components/forms/FormItemTextInput';
-import ConnectWalletButton from '@app/components/wallet/ConnectWalletButton';
 import FormItemAddressShares from '../forms/FormItemAddressShares';
 import FormItemPieChart from '../forms/FormItemPieChart';
+import FormFooter from './FormFooter';
 
 const CreateBank: FunctionComponent = () => {
   const { network, provider, account } = useWallet();
@@ -26,7 +22,6 @@ const CreateBank: FunctionComponent = () => {
 
   const [txHash, setTXHash] = useState<string>();
   const [contractAddress, setContractAddress] = useState<string>();
-  const [_buildJob, setBuildJob] = useState<any>();
   const [error, setError] = useState<string>();
 
   useEffect(() => {
@@ -71,7 +66,21 @@ const CreateBank: FunctionComponent = () => {
       if (!events.length) {
         await tx.wait(1);
         events = await deployer.queryFilter(filter, blockNumber);
-        if (!events.length) throw new Error('Something went wrong!');
+        if (!events.length) {
+          await tx.wait(1);
+          events = await deployer.queryFilter(filter, blockNumber);
+        }
+        if (!events.length) {
+          await tx.wait(1);
+          events = await deployer.queryFilter(filter, blockNumber);
+        }
+        if (!events.length) {
+          await tx.wait(1);
+          events = await deployer.queryFilter(filter, blockNumber);
+        }
+        if (!events.length) {
+          throw new Error('Something went wrong!');
+        }
       }
       const event = events[0];
       const contractAddress = event.args.contractAddress;
@@ -94,12 +103,11 @@ const CreateBank: FunctionComponent = () => {
             : null
       };
 
-      const job = await fetch(`${process.env.NEXT_PUBLIC_BUILD_SERVER}/build`, {
+      await fetch(`${process.env.NEXT_PUBLIC_BUILD_SERVER}/build`, {
         method: 'POST',
         body: JSON.stringify({ config }),
         headers: { 'content-type': 'application/json' }
       }).then(res => res.json());
-      setBuildJob(job);
     } catch (err) {
       console.log(err);
       setError(
@@ -166,31 +174,9 @@ const CreateBank: FunctionComponent = () => {
                 />
               </div>
             )}
-
-            {contractAddress ? (
-              <div className="form-section">
-                <>Contract: {contractAddress}</>
-                <BuildStatus contractAddress={contractAddress} />
-              </div>
-            ) : txHash ? (
-              <>Deploying.... (TX Hash: {txHash})</>
-            ) : (
-              <>
-                {!network ? (
-                  <ConnectWalletButton />
-                ) : SupportedChainIds.includes(network.chainId) ? (
-                  <button type="submit">Deploy to {network.name}</button>
-                ) : (
-                  <div className="wrong-network">
-                    Switch to a supported network (Rinkeby, Goerli, Mumbai) in
-                    your Wallet.
-                  </div>
-                )}
-              </>
-            )}
+            <FormFooter {...{ txHash, contractAddress, error }} />
           </form>
         </div>
-        {error && <div className="error">{error}</div>}
       </div>
       <style jsx>{`
         .page {
@@ -209,7 +195,7 @@ const CreateBank: FunctionComponent = () => {
 
         .create-form {
           padding: 20px;
-          min-width: 400px;
+          width: 100%;
           max-width: 640px;
           border: 3px solid black;
         }
@@ -220,24 +206,6 @@ const CreateBank: FunctionComponent = () => {
         }
         .form-section {
           margin-bottom: 40px;
-        }
-        .error {
-          background-color: red;
-          color: white;
-          padding: 5px;
-          font-size: 14px;
-          text-align: center;
-        }
-        button {
-          padding: 5px 10px;
-          outline: none;
-          border: none;
-          border-radius: 3px;
-          background-color: black;
-          border-radius: 5px;
-          font-size: 14px;
-          color: white;
-          cursor: pointer;
         }
       `}</style>
     </div>

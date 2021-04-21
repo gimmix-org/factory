@@ -15,8 +15,7 @@ const MainLayout: FunctionComponent = ({ children }) => {
       </Head>
       <header>
         <div className="info-bar">
-          This is an experimental tool to customize and launch your own
-          decentralized / web3 / nft site. It is not production ready!
+          This is an experimental tool. It is not production ready!
           <div className="stripes">
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
               <defs>
@@ -106,6 +105,7 @@ const MainLayout: FunctionComponent = ({ children }) => {
           flex: 1 1 auto;
           max-width: 1200px;
           margin: 0 auto;
+          width: 100%;
           padding: 100px 0;
         }
         footer {

@@ -29,8 +29,7 @@ const FormItemAddressShares = ({
             className="address"
             key={address}
             style={{
-              backgroundColor: `#${address.slice(-6)}11`,
-              borderColor: `#${address.slice(-6)}88`
+              backgroundColor: `#${address.slice(-6)}33`
             }}
           >
             <div className="full-address">{address}</div>
@@ -75,10 +74,8 @@ const FormItemAddressShares = ({
         }
         .address {
           padding: 10px;
-          border: 1px solid #ccc;
           border-radius: 3px;
           margin-bottom: 10px;
-
           display: flex;
           align-items: center;
           justify-content: space-between;
