@@ -8,17 +8,42 @@ const BuildStatus = ({ contractAddress }: { contractAddress: string }) => {
     <div className="build-status">
       {!job.finishedOn ? (
         <progress value={job.progress} max="100" />
+      ) : job.returnvalue ? (
+        <div className="success">
+          <a
+            href={job.returnvalue.siteUrl.replace(
+              'ipfs://',
+              'https://ipfs.io/ipfs/'
+            )}
+            target="_blank"
+            className="preview"
+          >
+            Preview your site here →
+          </a>
+          <a
+            href={job.returnvalue.staticZipUrl.replace(
+              'ipfs://',
+              'https://ipfs.io/ipfs/'
+            )}
+            target="_blank"
+            className="preview"
+          >
+            Download Static Site →
+          </a>
+
+          <a
+            href={job.returnvalue.sourceZipUrl.replace(
+              'ipfs://',
+              'https://ipfs.io/ipfs/'
+            )}
+            target="_blank"
+            className="preview"
+          >
+            Download Source Code →
+          </a>
+        </div>
       ) : (
-        <a
-          href={job.returnvalue.ipfsUrl.replace(
-            'ipfs://',
-            'https://ipfs.io/ipfs/'
-          )}
-          target="_blank"
-          className="preview"
-        >
-          Preview your site here →
-        </a>
+        <pre>{JSON.stringify(job, null, 2)}</pre>
       )}
       <style jsx>{`
         .build-status {
@@ -34,6 +59,9 @@ const BuildStatus = ({ contractAddress }: { contractAddress: string }) => {
         }
         .preview:hover {
           text-decoration: none;
+        }
+        .success a {
+          margin-bottom: 10px;
         }
       `}</style>
     </div>
