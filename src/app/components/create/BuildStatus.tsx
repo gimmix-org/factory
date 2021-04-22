@@ -3,6 +3,7 @@ import React from 'react';
 
 const BuildStatus = ({ contractAddress }: { contractAddress: string }) => {
   const job = useBuildStatus(contractAddress);
+  console.log({ job });
   if (!job) return null;
   return (
     <>

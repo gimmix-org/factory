@@ -5,19 +5,24 @@ const IndexPage = () => {
     <div className="page">
       <div className="page-title">What do you want to make?</div>
       <div className="generators">
-        <Link href="/create/portfolio">
+        <Link href="/create/bank">
           <a className="generator">
-            <div className="title">Portfolio</div>
+            <div className="title">Bank</div>
+            <div className="status">v0.1.0</div>
+          </a>
+        </Link>
+
+        <Link href="/create/shop">
+          <a className="generator">
+            <div className="title">Shop</div>
             <div className="status">v0.0.1</div>
           </a>
         </Link>
 
-        <Link href="/create/bank">
-          <a className="generator">
-            <div className="title">Bank</div>
-            <div className="status">v0.0.1</div>
-          </a>
-        </Link>
+        <div className="generator">
+          <div className="title">Membership</div>
+          <div className="status">Soon</div>
+        </div>
       </div>
       <style jsx>{`
         .page {

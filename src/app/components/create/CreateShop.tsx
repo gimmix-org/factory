@@ -5,7 +5,7 @@ import { useWallet } from '@gimmixfactory/use-wallet';
 import FormItemTextInput from '@app/components/forms/FormItemTextInput';
 import FormFooter from './FormFooter';
 
-const CreatePortfolio = () => {
+const CreateShop = () => {
   const { network, provider, account } = useWallet();
 
   const [name, setName] = useState('');
@@ -27,7 +27,7 @@ const CreatePortfolio = () => {
     try {
       const blockNumber = await provider.getBlockNumber();
 
-      const tx = await deployer.createPortfolio(
+      const tx = await deployer.createShop(
         name,
         name.replace(/ /g, '').toUpperCase()
       );
@@ -35,15 +35,17 @@ const CreatePortfolio = () => {
       await tx.wait(1);
       const filter = deployer.filters.ContractDeployed(
         account,
-        'Portfolio',
+        'Shop',
         null,
         null
       );
 
-      let events = await deployer.queryFilter(filter, blockNumber);
+      let events = await deployer.queryFilter(filter, blockNumber - 1);
+      let i = 1;
       while (!events.length) {
-        await tx.wait(1);
-        events = await deployer.queryFilter(filter, blockNumber);
+        i++;
+        await tx.wait(i);
+        events = await deployer.queryFilter(filter, blockNumber - 1);
       }
       const event = events[0];
 
@@ -51,9 +53,9 @@ const CreatePortfolio = () => {
       setContractAddress(contractAddress);
 
       const config = {
-        template: 'portfolio',
+        template: 'shop',
         name: name,
-        description: `The portfolio of ${name}.`,
+        description: `The shop of ${name}.`,
         contractAddress,
         creatorAddress: account,
         chainId: network.chainId,
@@ -84,7 +86,7 @@ const CreatePortfolio = () => {
 
   return (
     <div className="page">
-      <div className="page-title">Let's set up your Portfolio</div>
+      <div className="page-title">Let's set up your Shop</div>
       <div className="create-form">
         <div className="section">
           <form onSubmit={onDeployClick}>
@@ -92,13 +94,13 @@ const CreatePortfolio = () => {
               <FormItemTextInput
                 label="Set a name"
                 description="This can be your name, the name of your business, the name of
-                  a collection you'd like to share, etc. This will appear on your Portfolio and anywhere your NFT collection is seen."
+                  a collection you'd like to share, etc. This will appear on your Shop and anywhere your NFT collection is seen."
                 value={name}
                 setValue={setName}
                 inputProps={{
                   required: true,
                   minLength: 3,
-                  placeholder: 'Enter a name for your Portfolio...',
+                  placeholder: 'Enter a name for your Shop...',
                   disabled: !!txHash
                 }}
               />
@@ -141,4 +143,4 @@ const CreatePortfolio = () => {
   );
 };
 
-export default React.memo(CreatePortfolio);
+export default React.memo(CreateShop);

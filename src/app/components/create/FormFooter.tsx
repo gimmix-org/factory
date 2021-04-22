@@ -50,7 +50,7 @@ const FormFooter = ({
           {!network ? (
             <ConnectWalletButton />
           ) : SupportedChainIds.includes(network.chainId) ? (
-            <button type="submit">Deploy to {network.name}</button>
+            <button type="submit">Launch it</button>
           ) : (
             <div className="wrong-network">
               Switch to a supported network (Rinkeby, Goerli, Mumbai) in your

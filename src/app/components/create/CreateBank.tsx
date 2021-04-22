@@ -24,9 +24,9 @@ const CreateBank: FunctionComponent = () => {
   const [contractAddress, setContractAddress] = useState<string>();
   const [error, setError] = useState<string>();
 
-  useEffect(() => {
-    if (account && addresses.length == 0) setAddresses([account]);
-  }, [account]);
+  // useEffect(() => {
+  //   if (account && addresses.length == 0) setAddresses([account]);
+  // }, [account]);
 
   useEffect(() => {
     if (shares.length < addresses.length) setShares([...shares, 1]);
@@ -62,11 +62,12 @@ const CreateBank: FunctionComponent = () => {
         null,
         null
       );
-      let events = await deployer.queryFilter(filter, blockNumber);
-
+      let events = await deployer.queryFilter(filter, blockNumber - 1);
+      let i = 1;
       while (!events.length) {
-        await tx.wait(1);
-        events = await deployer.queryFilter(filter, blockNumber);
+        i++;
+        await tx.wait(i);
+        events = await deployer.queryFilter(filter, blockNumber - 1);
       }
 
       const event = events[0];
