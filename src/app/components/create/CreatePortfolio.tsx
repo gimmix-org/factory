@@ -41,24 +41,9 @@ const CreatePortfolio = () => {
       );
 
       let events = await deployer.queryFilter(filter, blockNumber);
-      if (!events.length) {
+      while (!events.length) {
         await tx.wait(1);
         events = await deployer.queryFilter(filter, blockNumber);
-        if (!events.length) {
-          await tx.wait(1);
-          events = await deployer.queryFilter(filter, blockNumber);
-        }
-        if (!events.length) {
-          await tx.wait(1);
-          events = await deployer.queryFilter(filter, blockNumber);
-        }
-        if (!events.length) {
-          await tx.wait(1);
-          events = await deployer.queryFilter(filter, blockNumber);
-        }
-        if (!events.length) {
-          throw new Error('Something went wrong!');
-        }
       }
       const event = events[0];
 
