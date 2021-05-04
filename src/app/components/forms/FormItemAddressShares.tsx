@@ -19,7 +19,7 @@ const FormItemAddressShares = ({
     setShares(_shares);
   };
   return (
-    <>
+    <div className="form-item">
       <label>{label}</label>
       <div className="description">{description}</div>
 
@@ -93,7 +93,7 @@ const FormItemAddressShares = ({
           cursor: pointer;
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

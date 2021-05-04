@@ -13,7 +13,7 @@ const FormItemPieChart = ({
 }) => {
   const total = data.reduce<number>((acc, cur) => cur.value + acc, 0);
   return (
-    <>
+    <div className="form-item">
       <label>{label}</label>
       <div className="description">{description}</div>
 
@@ -94,7 +94,7 @@ const FormItemPieChart = ({
         .chart {
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

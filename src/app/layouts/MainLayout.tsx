@@ -1,50 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import ConnectWalletButton from '@app/components/wallet/ConnectWalletButton';
 
 const MainLayout: FunctionComponent = ({ children }) => {
   return (
     <div className="main-layout">
-      <Head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <header>
-        <div className="info-bar">
-          This is an experimental tool. It is not production ready!
-          <div className="stripes">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-              <defs>
-                <pattern
-                  id="pattern_Z4YTl"
-                  patternUnits="userSpaceOnUse"
-                  width="5"
-                  height="5"
-                  patternTransform="rotate(75)"
-                >
-                  <line
-                    x1="0"
-                    y="0"
-                    x2="0"
-                    y2="5"
-                    stroke="ghostwhite"
-                    strokeWidth="5"
-                  />
-                </pattern>
-              </defs>
-              <rect
-                width="100%"
-                height="100%"
-                fill="url(#pattern_Z4YTl)"
-                opacity="0.1"
-              />
-            </svg>
-          </div>
-        </div>
         <div className="header">
           <div>
             <Link href="/">
@@ -56,7 +17,6 @@ const MainLayout: FunctionComponent = ({ children }) => {
           </div>
         </div>
       </header>
-
       <main>{children}</main>
 
       <style jsx>{`
@@ -65,29 +25,22 @@ const MainLayout: FunctionComponent = ({ children }) => {
           flex-direction: column;
           width: 100%;
           min-height: 100vh;
+          background-color: ghostwhite;
         }
         header {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-        }
-        .info-bar {
-          padding: 5px 20px;
-          background-color: blueviolet;
-          color: white;
-          text-transform: uppercase;
-          font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
-            Courier, monospace;
-          font-size: 12px;
-          position: relative;
-          overflow: hidden;
+          z-index: 1;
         }
         .header {
           padding: 10px 20px;
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
+          background-color: hsla(240, 100%, 99%, 80%);
+          backdrop-filter: blur(5px);
         }
         .stripes {
           position: absolute;
@@ -100,13 +53,18 @@ const MainLayout: FunctionComponent = ({ children }) => {
         .factory {
           font-weight: bold;
           font-size: 24px;
+          letter-spacing: -1.5px;
+        }
+        .factory:hover {
+          text-decoration: none;
         }
         main {
           flex: 1 1 auto;
-          max-width: 1200px;
+          max-width: 1280px;
           margin: 0 auto;
           width: 100%;
-          padding: 100px 0;
+          padding: 80px 20px;
+          position: relative;
         }
         footer {
           position: fixed;
@@ -117,6 +75,7 @@ const MainLayout: FunctionComponent = ({ children }) => {
         }
       `}</style>
       <style jsx global>{`
+        @import url('https://rsms.me/inter/inter.css');
         * {
           box-sizing: border-box;
           margin: 0;
@@ -127,11 +86,11 @@ const MainLayout: FunctionComponent = ({ children }) => {
         input,
         textarea,
         button {
-          font-family: 'Space Grotesk', sans-serif;
+          font-family: 'Inter', sans-serif;
         }
         html,
         body {
-          background-color: ghostwhite;
+          background-color: white;
         }
         a {
           color: inherit;
@@ -139,6 +98,16 @@ const MainLayout: FunctionComponent = ({ children }) => {
         }
         a:hover {
           text-decoration: underline;
+        }
+        h1 {
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: -2px;
+        }
+        @supports (font-variation-settings: normal) {
+          html {
+            font-family: 'Inter var', sans-serif;
+          }
         }
       `}</style>
     </div>

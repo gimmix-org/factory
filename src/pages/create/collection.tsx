@@ -2,26 +2,27 @@ import FormItemTextInput from '@app/components/forms/FormItemTextInput';
 import CreateLayout from '@app/layouts/CreateLayout';
 import React, { FunctionComponent, useState } from 'react';
 
-const CreateShopPage: FunctionComponent = () => {
+const CreateCollectionPage: FunctionComponent = () => {
   const [name, setName] = useState('');
+
   const deploy = async () => {
     return {};
   };
   return (
     <CreateLayout
-      title="Shop"
+      title="Collection"
       version="v0.0.1"
-      description="Create a personal NFT shop or portfolio. You'll be able to mint your own NFTs efficiently, and sell them as one-offs or multi-editions."
+      description="Create an auto-updating website for your NFT collection..."
       deploySite={deploy}
     >
       <FormItemTextInput
-        label=""
-        description=""
         value={name}
         setValue={setName}
+        label="Set a Name"
+        description="This will be displayed as the title for your website in browser tabs and windows, and in the previews when shared on social media or messaging apps."
       />
     </CreateLayout>
   );
 };
 
-export default CreateShopPage;
+export default CreateCollectionPage;

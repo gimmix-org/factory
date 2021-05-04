@@ -11,13 +11,13 @@ const FormItemTextInput = ({
   description: string;
   value: any;
   setValue: (value: any) => void;
-  inputProps: React.DetailedHTMLProps<
+  inputProps?: React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >;
 }) => {
   return (
-    <>
+    <div className="form-item">
       <label>{label}</label>
       <div className="description">{description}</div>
       <input
@@ -53,7 +53,7 @@ const FormItemTextInput = ({
           outline: none;
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

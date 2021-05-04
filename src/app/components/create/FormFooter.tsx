@@ -62,11 +62,7 @@ const FormFooter = ({
       {error && <div className="error">{error}</div>}
       <style jsx>{`
         .form-footer {
-          border-top: 1px solid black;
-          margin: -20px;
-          padding: 20px;
-          margin-top: 0;
-          background-color: #f1f1f1;
+          margin-top: 20px;
         }
         button {
           padding: 5px 10px;

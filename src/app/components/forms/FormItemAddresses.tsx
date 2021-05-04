@@ -5,17 +5,18 @@ const FormItemAddresses = ({
   label,
   description,
   addresses,
-  setAddresses
+  setAddresses,
+  maxAddresses
 }: {
   label: string;
   description: string;
   addresses: string[];
   setAddresses: (addresses: string[]) => void;
+  maxAddresses?: number;
 }) => {
   const [newAddress, setNewAddress] = useState('');
   const addAddress = () => {
     if (!validateETH(newAddress)) return;
-
     setAddresses([...addresses.filter(a => a != newAddress), newAddress]);
     setNewAddress('');
   };
@@ -24,7 +25,7 @@ const FormItemAddresses = ({
   };
 
   return (
-    <>
+    <div className="form-item">
       <label>{label}</label>
       <div className="description">{description}</div>
 
@@ -43,18 +44,20 @@ const FormItemAddresses = ({
         ))}
       </div>
 
-      <div className="new-address">
-        <input
-          type="text"
-          placeholder="0x..."
-          value={newAddress}
-          pattern="^(0x){1}[0-9a-fA-F]{40}$"
-          onChange={e => setNewAddress(e.target.value)}
-        />
-        <button type="button" onClick={addAddress}>
-          Add
-        </button>
-      </div>
+      {!!maxAddresses && addresses.length + 1 <= maxAddresses && (
+        <div className="new-address">
+          <input
+            type="text"
+            placeholder="0x..."
+            value={newAddress}
+            pattern="^(0x){1}[0-9a-fA-F]{40}$"
+            onChange={e => setNewAddress(e.target.value)}
+          />
+          <button type="button" onClick={addAddress}>
+            Add
+          </button>
+        </div>
+      )}
 
       <style jsx>{`
         label {
@@ -105,7 +108,7 @@ const FormItemAddresses = ({
           cursor: pointer;
         }
       `}</style>
-    </>
+    </div>
   );
 };
 
